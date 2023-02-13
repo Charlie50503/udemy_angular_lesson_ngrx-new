@@ -14,7 +14,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeService } from './recipes/recipe.service';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import {StoreModule} from '@ngrx/store'
-import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { reducer, shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
     // StoreModule.forRoot({shoppingList:shoppingListReducer}),
     ShoppingListModule,
     SharedModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({shoppingList:reducer}, {}),
   ],
   providers:[
     ShoppingListService,

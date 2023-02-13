@@ -1,7 +1,7 @@
-import { Action } from "@ngrx/store";
+import { Action, createReducer, on } from "@ngrx/store";
 import { Ingredient } from "src/app/shared/ingredient.model";
 import * as ShoppingListActions from './shopping-list.actions'
-
+import {addIngredient} from './shopping-list.actions'
 export interface State {
   ingredients:Ingredient[],
   editedIngredient:Ingredient,
@@ -20,6 +20,17 @@ const initialState = {
   editedIngredient:null,
   editedIngredientIndex:-1,
 }
+export const reducer = createReducer(
+  initialState,
+  on(addIngredient,(state,{data})=>{
+    console.log(data);
+
+    return {
+      ...state,
+      ingredients:[...state.ingredients,data]
+    }
+  })
+)
 
 export function shoppingListReducer(state=initialState,action:ShoppingListActions.ShoppingListActions){
   switch(action.type){
